@@ -1,0 +1,21 @@
+<script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+<script>
+  // Connect to your server
+  const socket = io("http://localhost:5000"); // replace with your backend URL
+
+  const currentUserId = "1"; // 🔁 your actual logged-in user ID from profile_users.id
+
+  // Join your own room to receive notifications
+  socket.emit("joinRoom", currentUserId);
+
+  // Listen for real-time notifications
+  socket.on("receiveNotification", (data) => {
+    console.log("🔔 New Notification:", data);
+
+    // Display in UI
+    alert(`🔔 ${data.message}`);
+
+    // Or append to a notification dropdown/list
+    // document.getElementById('notifications').innerHTML += `<li>${data.message}</li>`;
+  });
+</script>
